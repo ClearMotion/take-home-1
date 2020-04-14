@@ -5,17 +5,17 @@ In this assignment, you will be creating a fake RoadMotion microservice to store
 
 * A computer running Linux, macOS, or Windows
 * An internet connection
-* A Node.js installation (At least 8.0.0)
+* A Python 3 installation
 
 ### Step 1
 
-Create a Node.js script which listens to HTTP requests on port 3000. When the script receives a GET request at the endpoint `/greetUser`, the script should send back this JSON value:
+Create a Python script which listens to HTTP requests on port 3000. When the script receives a GET request at the endpoint `/greetUser`, the script should send back this JSON value:
 
 ```
 {"success": true, "message": "Hello world!"}
 ```
 
-We recommend using the Express framework for your script. However, you may use a different framework if you are more comfortable using it.
+We recommend using the Flask framework for your script. However, you may use a different framework if you are more comfortable using it.
 
 ### Step 2
 
@@ -57,7 +57,7 @@ We will assume for this whole assignment that the ID field is the only field whi
 
 Create a GET `/sessionSpeedVariance` endpoint. The endpoint should accept a single query string parameter `id` which is the ID of a session. We want the endpoint to find the variance (as defined in statistics) of all speed values of the session.
 
-We DON'T want you to create your own variance function. Instead, find and use an existing npm library.
+We DON'T want you to create your own variance function. Instead, use the existing variance function in the NumPy library (https://numpy.org). Document the steps you took to install this dependency.
 
 Upon success, the endpoint should give this response:
 
@@ -85,7 +85,7 @@ Create a GET `/sessionTotalDistance` endpoint. This endpoint should also accept 
 
 The position field `pos` first contains a latitude coordinate, then a longitude coordinate. The `/sessionDistance` endpoint should find the distance between consecutive `data` elements and return the sum of all the distances.
 
-We DON'T want you to do any geometry. Instead, find an npm library which calculates the distance between two coordinate pairs.
+We DON'T want you to do any geometry. Instead, find an Python library which calculates the distance between two coordinate pairs. Document the name of the library and how you installed it.
 
 Upon success, the endpoint should give this response:
 
