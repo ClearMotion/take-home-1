@@ -1,7 +1,9 @@
 
 ### Overview
 
-In this assignment, you will be creating a fake RoadMotion microservice to store vehicle data and perform some analysis. This assignment has the following set-up requirements:
+In this assignment, you will create a fake RoadMotion microservice to store vehicle data and perform some analysis. After that, you will describe how you would improve your system so the architecture can meet various requirements.
+
+This assignment has the following set-up requirements:
 
 * A computer running Linux, macOS, or Windows
 * An internet connection
@@ -71,17 +73,15 @@ Below is the expected output for each example session file:
 * `session35935.json` speed variance = 56.69
 * `session36261.json` speed variance = 43.33
 
-Upon failure, the endpoint should give this response:
+If the given session ID has no corresponding file, the endpoint should return this response:
 
 ```
-{"success": false, "message": string}
+{"success": false, "message": "Session does not exist."}
 ```
-
-For example, the script should report failure if the given session ID has no corresponding file. Try to include as many failure conditions as possible within reason.
 
 ### Step 4
 
-Create a GET `/sessionTotalDistance` endpoint. This endpoint should also accept a single query string parameter `id`. We want the endpoint to find the total distance covered by the session.
+Create a GET `/sessionDistance` endpoint. This endpoint should also accept a single query string parameter `id`. We want the endpoint to find the distance covered by the whole session.
 
 The position field `pos` first contains a latitude coordinate, then a longitude coordinate. The `/sessionDistance` endpoint should find the distance between consecutive `data` elements and return the sum of all the distances.
 
@@ -90,21 +90,34 @@ We DON'T want you to do any geometry. Instead, find an Python library which calc
 Upon success, the endpoint should give this response:
 
 ```
-{"success": true, "totalDistance": number}
+{"success": true, "distance": number}
 ```
 
-`totalDistance` should be in meters. Below is the expected output for each example session file:
+`distance` should be in meters. Below is the expected output for each example session file:
 
-* `session36255.json` total distance = 1415.1 meters
-* `session35935.json` total distance = 2800.4 meters
-* `session36261.json` total distance = 8206.7 meters
+* `session36255.json` distance = 1415.1 meters
+* `session35935.json` distance = 2800.4 meters
+* `session36261.json` distance = 8206.7 meters
 
-Upon failure, the endpoint should give this response:
+As in the previous step of this exercise, the endpoint should return this response if the session file is missing:
 
 ```
-{"success": false, "message": string}
+{"success": false, "message": "Session does not exist."}
 ```
 
-Again, try to catch as many error cases as you can within reason.
+### Step 5
+
+The server we have implemented in steps 1 through 4 is rather primitive. For instance, the server can only run on a single machine because it saves session data to local files.
+
+Suppose that we wanted to scale this application to support the following requirements:
+
+* Must ingest session data from approximately 50,000 active vehicles
+* Must handle approximately 500,000 calls to `/sessionSpeedVariance` and `/sessionDistance` per day
+* Must be robust against data loss due to server failure
+* Clients must authenticate before uploading or downloading data
+
+Please describe how you would architect the system to satisfy these requirements. Discuss specific frameworks, database software, and hosting services your architecture would use. For each subsystem, explain the benefits and drawbacks of options you considered.
+
+You will need to present your work in a **PowerPoint presentation** to the RoadMotion team. This presentation should describe your code from steps 1 through 4, and your proposed architecture from step 5. The audience will consist of multi-disciplined engineers (not just software developers), so make sure that the whole team can understand your presentation.
 
 
