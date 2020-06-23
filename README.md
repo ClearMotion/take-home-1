@@ -81,7 +81,7 @@ For example, the script should report failure if the given session ID has no cor
 
 ### Step 4
 
-Create a GET `/sessionTotalDistance` endpoint. This endpoint should also accept a single query string parameter `id`. We want the endpoint to find the total distance covered by the session.
+Create a GET `/sessionDistance` endpoint. This endpoint should also accept a single query string parameter `id`. We want the endpoint to find the distance covered by the whole session.
 
 The position field `pos` first contains a latitude coordinate, then a longitude coordinate. The `/sessionDistance` endpoint should find the distance between consecutive `data` elements and return the sum of all the distances.
 
@@ -90,14 +90,14 @@ We DON'T want you to do any geometry. Instead, find an npm library which calcula
 Upon success, the endpoint should give this response:
 
 ```
-{"success": true, "totalDistance": number}
+{"success": true, "distance": number}
 ```
 
-`totalDistance` should be in meters. Below is the expected output for each example session file:
+`distance` should be in meters. Below is the expected output for each example session file:
 
-* `session36255.json` total distance = 1415.1 meters
-* `session35935.json` total distance = 2800.4 meters
-* `session36261.json` total distance = 8206.7 meters
+* `session36255.json` distance = 1415.1 meters
+* `session35935.json` distance = 2800.4 meters
+* `session36261.json` distance = 8206.7 meters
 
 Upon failure, the endpoint should give this response:
 
